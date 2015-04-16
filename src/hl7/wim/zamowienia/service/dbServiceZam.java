@@ -18,7 +18,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author k.skowronski
+ * @author k.skowronski 2014-04-16
  */
 public class dbServiceZam {
     
