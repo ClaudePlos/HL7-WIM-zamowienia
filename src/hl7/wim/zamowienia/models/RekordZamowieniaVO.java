@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class RekordZamowieniaVO {
     
+    public String _ORC;
     public String typZamowienia;
     public String numerZamowienia;
     public String dataZlecenia;

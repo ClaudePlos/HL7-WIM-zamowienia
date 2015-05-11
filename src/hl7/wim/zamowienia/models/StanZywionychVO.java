@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class StanZywionychVO {
     
+    public String _RQD;
+    
     public String nrKolejnySegmentu;
     
     public String dietaID;

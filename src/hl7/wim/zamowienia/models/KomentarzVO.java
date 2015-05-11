@@ -11,6 +11,8 @@ package hl7.wim.zamowienia.models;
  */
 public class KomentarzVO {
     
+    public String _NTE;
+    
     public String nrKolejnySegmentu;
     
     public String zrodlo;

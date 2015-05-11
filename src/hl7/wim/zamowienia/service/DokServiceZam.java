@@ -212,6 +212,8 @@ public class DokServiceZam {
              System.out.println( test.toString() );
         }*/
         
+        dbServiceZam.getInstance().WgrajStanyZywionych( posilek, zamowienia );
+        
         return "OK";
     }
     

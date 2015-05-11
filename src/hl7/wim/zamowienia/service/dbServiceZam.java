@@ -35,7 +35,7 @@ public class dbServiceZam {
     
     
     
-    public static void WgrajStanyZywionych( List<RekordZamowieniaVO> zamowieniaWDniu )
+    public static void WgrajStanyZywionych( String posilek, List<RekordZamowieniaVO> zamowieniaWDniu )
     {
         
         for ( RekordZamowieniaVO rz : zamowieniaWDniu )
@@ -47,7 +47,11 @@ public class dbServiceZam {
                     Session session = NewHibernateUtil.getSessionFactory().openSession();
                     session.beginTransaction();
 
-                    String str = "begin szp_hl7_import_rwd.rwd_tworz_naglowek(  );end;";
+                    String str = "begin nap_hl7_tools.WGRAJ_STAN_ZYW_W_DNIU_PLAN('" + rz.kierunekKosztowNazwa  + "'"
+                            + ",'" + sz.dietaNazwa + "'"
+                            + ",'" + sz.dataRealizacji.substring(0,4)+"-"+sz.dataRealizacji.substring(4,6)+"-"+sz.dataRealizacji.substring(6,8) + "'"
+                            + ",'1'"
+                            + "," + sz.liczbaPosilkow + ");end;";
                     session.createSQLQuery(str).executeUpdate();
                     session.getTransaction().commit();
 
