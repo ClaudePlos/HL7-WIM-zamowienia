@@ -28,6 +28,6 @@ public class StanZywionychVO {
     
     public String dataRealizacji;
     
-    public List<KomentarzVO> komentarz;
+    public KomentarzVO komentarz;
     
 }

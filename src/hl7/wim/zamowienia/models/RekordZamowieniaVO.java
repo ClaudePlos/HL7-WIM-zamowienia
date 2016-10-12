@@ -21,6 +21,8 @@ public class RekordZamowieniaVO {
     public String kierunekKosztowNazwa;
     public String kierunekKosztowKodOddzialu;
     
+    public String kodPosilkuWIM;
+    
     public List<StanZywionychVO> stanyZywionych;
   
 }

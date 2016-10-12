@@ -54,6 +54,7 @@ public class DokServiceZam {
         String NTE01 = null;
         String NTE02 = null;
         String NTE03 = null;
+        String NTE04 = null;
         
         String ORC01 = null;
         String ORC02 = null;
@@ -90,9 +91,19 @@ public class DokServiceZam {
                 
                 HL7Segment actSeg = msg7.get(i);
                 
+                
+                //sukamy 1 linijki NTE bo pozostałe to kometarz chyba TODO i mamy czy to obiad, kolacja czy inne 
+                if (actSeg.getSegmentType().equals("NTE") && actSeg.get(3).toString().intern().indexOf("CN_Warszawa_WIM") != -1 )
+                {
+                     zm = new RekordZamowieniaVO();
+                     NTE04 =  actSeg.get(3).get(0).get(1).toString().substring(0, 1);
+                     zm.kodPosilkuWIM = NTE04;
+                }
+                
+                
                 if (actSeg.getSegmentType().equals("ORC"))
                 {
-                    zm = new RekordZamowieniaVO();
+                   
                     
                     ORC01 = actSeg.get(1).toString(); // typ zamówienia 
                     ORC02 = actSeg.get(2).get(0).get(0).toString();
@@ -145,7 +156,7 @@ public class DokServiceZam {
                       
                 if (actSeg.getSegmentType().equals("RQD") )
                 { 
-                    RQD01 = actSeg.get(1).toString();;
+                    RQD01 = actSeg.get(1).toString();
                     RQD02_0 = actSeg.get(2).get(0).get(0).toString();
                     RQD02_1 = actSeg.get(2).get(0).get(1).toString();
                     RQD02_2 = actSeg.get(2).get(0).get(2).toString();
@@ -165,28 +176,31 @@ public class DokServiceZam {
                     stanZyw.kodJednostkiKosztowej = RQD07;
                     stanZyw.dataRealizacji = RQD10;
                     
-                    stanZyw.komentarz = new ArrayList<KomentarzVO>();
+                   // stanZyw.komentarz = new KomentarzVO;
                     
                     zm.stanyZywionych.add(stanZyw); 
                 }
-                      
+                
+                
+                // to już inne NTE i chyba je nie obsługujemy      
                 if (actSeg.getSegmentType().equals("NTE") )
                 {
                     NTE01 =  actSeg.get(1).toString(); 
                     NTE02 =  actSeg.get(2).toString();
                     NTE03 =  actSeg.get(3).toString();
                     
-                    if (NTE03.intern().indexOf("CN_Warszawa_WIM") == -1)
+                    int spr = NTE03.intern().indexOf("CN_Warszawa_WIM");
+                    
+                    if ( spr == -1)
                     {
                        KomentarzVO kom = new KomentarzVO();
                        kom.nrKolejnySegmentu = NTE01;
                        kom.zrodlo = NTE02;
                        kom.uwagiDoDtety = NTE03;
-
-                       stanZyw.komentarz.add(kom); 
+                       stanZyw.komentarz = kom; 
                     }
                     else
-                    {
+                    { 
                         posilek = actSeg.get(3).get(0).get(1).toString();
                     }
                     
