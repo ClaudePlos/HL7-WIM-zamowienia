@@ -18,7 +18,7 @@ import java.util.AbstractList;
         
 /**
  *
- * @author k.skowronski
+ * @author k.skowronski v2017
  */
 public class DokServiceZam {
     
