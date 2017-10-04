@@ -50,7 +50,7 @@ public class dbServiceZam {
             for ( StanZywionychVO sz : rz.stanyZywionych )
             {
                 // spr GZid Obce
-                System.out.println( "Sprawdzenie IdObceGZ: " + rz.kierunekKosztowID );
+                System.out.println( "Sprawdzenie IdObceGZ: " + rz.kierunekKosztowID + " Sprawdzenie IdObceNazwa: " + rz.kierunekKosztowNazwa);
                 System.out.println( "Zamówienie na dzień: " +  sz.dataRealizacji.substring(0,4)+"-"+sz.dataRealizacji.substring(4,6)+"-"+sz.dataRealizacji.substring(6,8) );
                 Session session = NewHibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
@@ -71,7 +71,7 @@ public class dbServiceZam {
                // 
                 
                 // spr dieta id obce
-                System.out.println( "Sprawdzenie IdObceDieta: " + sz.dietaID );
+                System.out.println( "Sprawdzenie IdObceDieta: " + sz.dietaID + " dieta nazwa: " + sz.dietaNazwa + " liczba posiłków: " + sz.liczbaPosilkow);
                 session.beginTransaction();
                 Query q1 = session.createSQLQuery( "select map_id_mapi \n" +
                     "from nap_mapowania \n" +
@@ -84,7 +84,7 @@ public class dbServiceZam {
                     ret = "OK";
                 else
                 {
-                   ret = "Nie można odnaleźć DietyIdObce: " + sz.dietaID + " w tabeli nap_mapowania";
+                   ret = "Nie można odnaleźć DietyIdObce: " + sz.dietaID + " dieta nazwa: " + sz.dietaNazwa  + " w tabeli nap_mapowania";
                    return ret;
                 }
                     
@@ -102,7 +102,7 @@ public class dbServiceZam {
         
     String spr = spradzCzyZamowienieMaMapowania( zamowieniaWDniu );
         
-    if ( spr.equals("OKkkkkkkkkkkkkk") )  /// skasować K do wgrywania 
+    if ( spr.equals("OK") )  /// skasować K do wgrywania 
     {
         
         
